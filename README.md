@@ -7,4 +7,4 @@ A simple pong game. I wanted to learn some C++ as well as do something with Open
 3. Extract and copy /include and /lib folder into /src
 
 ## Usage
-Run 'make' in the root directory of repo.
+Run '''make''' in the root directory of repo.
