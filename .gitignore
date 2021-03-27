@@ -5,3 +5,4 @@ main.exe
 /src/*
 *.dll
 main.exe
+main.o
