@@ -1,4 +1,5 @@
 #include <SFML/Graphics.hpp>
+#include <Server.hpp>
 #include <stdio.h>
 #include <string>
 #include <sstream>
@@ -76,6 +77,9 @@ void centerOrigin(sf::CircleShape* shape){
 
 int main()
 {
+    SERVER::connectSocket;
+
+
     sf::VideoMode vMode(500,500);
     sf::RenderWindow window(vMode, "PONG");
 
@@ -176,10 +180,10 @@ int main()
 				std::cout << event.key.code << std::endl;
 				// std::cout << 1.f/dt << std::endl; <- fps
                 if(event.key.code == 22 && !pBounds.intersects(uBounds)) {
-                    player.move(0, player.getPosition().y - (player.getPosition().y - (speed * dt)));
+                    player.move(0, player.getPosition().y - (player.getPosition().y + (speed * dt)));
                 }
                 if(event.key.code == 18 && !pBounds.intersects(lBounds)) {
-                    player.move(0, player.getPosition().y - (player.getPosition().y + (speed * dt)));
+                    player.move(0, player.getPosition().y - (player.getPosition().y - (speed * dt)));
                 }
 
 
