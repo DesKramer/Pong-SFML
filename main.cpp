@@ -176,10 +176,10 @@ int main()
 				std::cout << event.key.code << std::endl;
 				// std::cout << 1.f/dt << std::endl; <- fps
                 if(event.key.code == 22 && !pBounds.intersects(uBounds)) {
-                    player.setPosition(player.getPosition().x,player.getPosition().y - (speed * dt));
+                    player.move(0, player.getPosition().y - (player.getPosition().y - (speed * dt)));
                 }
                 if(event.key.code == 18 && !pBounds.intersects(lBounds)) {
-                    player.setPosition(player.getPosition().x,player.getPosition().y + (speed * dt));
+                    player.move(0, player.getPosition().y - (player.getPosition().y + (speed * dt)));
                 }
 
 
@@ -189,8 +189,6 @@ int main()
                 }
 
 			}
-
-
 
             if (event.type == sf::Event::MouseButtonPressed)
             {
