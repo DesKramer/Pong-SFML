@@ -5,6 +5,7 @@ A simple pong game. I wanted to learn some C++ as well as do something with Open
 2. Download and install [CMAKE](https://cmake.org/)
 2. Download [SFML](https://www.sfml-dev.org/)
 3. Extract and copy /include and /lib folder into /src
+4. Copy all .dll filles from /bin into the root folder
 
 ## Usage
 Run ```make``` in the root directory of repo.
