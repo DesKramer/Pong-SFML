@@ -8,6 +8,28 @@
 
 sf::Clock deltaClock;
 
+
+
+
+
+float vectorLength(sf::Vector2f a) {
+    return sqrt((a.x*a.x) + (a.y*a.y));
+}
+
+float dot(sf::Vector2f a, sf::Vector2f b) {
+    // printf("Attack Vec(%f%f)\n", a.x, a.y);
+    // printf("Normal Vec(%f%f)\n", b.x, b.y);
+    return ((a.x * b.x) + (a.y * b.y));
+}
+
+float angle(sf::Vector2f a, sf::Vector2f b) {
+    float dotProd = dot(a,b);
+    // printf("dot: %f\n", dotProd);
+    float lenA = vectorLength(a);
+    float lenB = vectorLength(b);
+    float theta = dotProd/(lenA*lenB);
+    return acos(theta);
+}
 // Projection of a onto b
 sf::Vector2f vectorProjection(sf::Vector2f a, sf::Vector2f b) {
     // Calculate b unit vector
@@ -77,7 +99,6 @@ void centerOrigin(sf::CircleShape* shape){
 
 int main()
 {
-    SERVER::connectSocket;
 
 
     sf::VideoMode vMode(500,500);
@@ -143,6 +164,13 @@ int main()
     sf::Vector2f fireVelo(200,0);
     sf::Rect<float> intersection;
 
+
+    
+    sf::Vector2f normalLine(10,0);
+
+
+
+    bool toggle_switch = false;
     while (window.isOpen())
     {
         window.clear();
@@ -187,6 +215,15 @@ int main()
                 }
 
 
+                if(event.key.code == 7) {
+                    toggle_switch = !toggle_switch;
+                    if(toggle_switch) {
+                        printf("Angle calulation toggled on\n");
+                    } else {
+                        printf("Angle calulation toggled of\n");
+                    }
+                }
+
                 // FIRE!!!
                 if(event.key.code == 57 & !inPlay) {
                     inPlay = true;
@@ -207,6 +244,7 @@ int main()
         if(bBounds.intersects(wBounds)) {
             bounceOffWall(&ball, &fireVelo);
         }
+
         if(bBounds.intersects(uBounds)) {
             bounceOffBounds(&ball, &fireVelo);
         }
@@ -214,11 +252,15 @@ int main()
             bounceOffBounds(&ball, &fireVelo);
         }
         
-        if(bBounds.intersects(pBounds, intersection)) {
+        if(bBounds.intersects(pBounds, intersection) && inPlay) {
+            if(toggle_switch) {
+                
+                float attack_angle = angle(fireVelo, normalLine);
+                printf("Ball hit the player at : %f%n", attack_angle);
+                toggle_switch = !toggle_switch;
+            }
             bounceOffPlayer(&ball, &fireVelo, player.getPosition().y-ball.getPosition().y);
         }
-
-
 
         if(inPlay){
             translateObject(&ball, fireVelo * dt);
