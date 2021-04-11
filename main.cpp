@@ -17,8 +17,6 @@ float vectorLength(sf::Vector2f a) {
 }
 
 float dot(sf::Vector2f a, sf::Vector2f b) {
-    // printf("Attack Vec(%f%f)\n", a.x, a.y);
-    // printf("Normal Vec(%f%f)\n", b.x, b.y);
     return ((a.x * b.x) + (a.y * b.y));
 }
 
@@ -104,14 +102,7 @@ int main()
     sf::VideoMode vMode(500,500);
     sf::RenderWindow window(vMode, "PONG");
 
-    sf::Font font;
-    if(!font.loadFromFile("bahnschrift.ttf")){
-        std::cout  << "Could not load font bahnschrift.ttf." << std::endl;
-    }
-    sf::Text fpsCounter;
-    fpsCounter.setFont(font);
-    fpsCounter.setCharacterSize(16);
-
+    
 
 
     // Wall
